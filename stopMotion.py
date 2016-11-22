@@ -22,6 +22,7 @@ class StubCamera():
 if sys.platform == "linux":
     IS_RPI = True
     import picamera
+
 else:
     IS_RPI = False
 
