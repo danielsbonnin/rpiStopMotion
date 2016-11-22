@@ -1,0 +1,5 @@
+""" globals.py """
+MAX_FRAMES = 18000
+MAX_FRAME_RATE = 30
+DATA_FILE = "data.p"
+NUM_DIAL_NOTCHES = 10

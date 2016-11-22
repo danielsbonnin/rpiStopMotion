@@ -1,3 +1,7 @@
 stopMotion/
 __pycache__/
+*.jpg
+*.p
+*.user
+
 
