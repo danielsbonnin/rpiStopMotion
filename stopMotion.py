@@ -21,7 +21,7 @@ class StubCamera():
         print('Img copied to {}'.format(name))
 if sys.platform == "linux":
     IS_RPI = True
-    import picamera
+    from picamera import PiCamera
 
 else:
     IS_RPI = False
@@ -102,6 +102,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
         while self.playing:
             for i in range(1, self.movie.preview_count + 1):
                 self.currentFrame.setText(str(i))
+                self.show_image(self.movie.get_filename_by_frame_no(i))      
                 sleep(1 / self.movie.frame_rate)
                 QApplication.processEvents()
     # access variables inside of the UI's file
@@ -113,7 +114,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
         
         self.updateUI()
         if IS_RPI:
-            self.camera = picamera.PiCamera()
+            self.camera = PiCamera()
         else:
             self.camera = StubCamera()
         self.captureButton.clicked.connect(lambda: self.captureButtonPressed())
