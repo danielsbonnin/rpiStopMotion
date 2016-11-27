@@ -40,6 +40,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     camera = None
     num_dial_notches = 0
     playing = False
+    in_capture_loop = False
 
     def currentFrameChanged(self, value):
         if self.movie.set_cur_frame(value):
@@ -56,9 +57,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def previewImage(self):
         import time
+        self.in_capture_loop = True
         self.camera.start_preview()
 
     def captureButtonPressed(self):
+        import time
         self.camera.stop_preview()
         filename = self.movie.get_next_filename()
         
@@ -74,6 +77,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print('Frame {} added'.format(filename))
         self.show_image(filename)
         self.updateUI()
+        time.sleep(1)
+        if self.in_capture_loop == True:
+            self.camera.start_preview()
 
     def deleteButtonPressed(self):
         print('delete button pressed')
@@ -117,7 +123,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.captureButtonPressed()
         elif e.key() == QtCore.Qt.Key_Escape:
             print('escape key')
-            self.close()
+            if self.in_capture_loop == True:
+                self.in_capture_loop = False
+            else:
+                self.close()
     # access variables inside of the UI's file
     def __init__(self):
         super(self.__class__, self).__init__()
