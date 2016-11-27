@@ -53,12 +53,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_image(self, filename):
         img = PyQt5.QtGui.QPixmap(filename)
         self.imageView.setPixmap(img)
-    def captureButtonPressed(self):
+    
+    def previewImage(self):
         import time
         self.camera.start_preview()
-        time.sleep(3)
+
+    def captureButtonPressed(self):
         self.camera.stop_preview()
-        """
         filename = self.movie.get_next_filename()
         
         try:
@@ -73,7 +74,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print('Frame {} added'.format(filename))
         self.show_image(filename)
         self.updateUI()
-        """
+
     def deleteButtonPressed(self):
         print('delete button pressed')
         self.movie.delete_frame(self.movie.cur_frame)
@@ -110,6 +111,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.currentFrame.setValue(i)
                 sleep(1 / self.movie.frame_rate)
                 QApplication.processEvents()
+    def keyPressEvent(self, e):
+        if e.key() == QtCore.Qt.Key_Space:
+            print('space key')
+            self.captureButtonPressed()
+        elif e.key() == QtCore.Qt.Key_Escape:
+            print('escape key')
+            self.close()
     # access variables inside of the UI's file
     def __init__(self):
         super(self.__class__, self).__init__()
@@ -122,7 +130,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.camera = PiCamera()
         else:
             self.camera = StubCamera()
-        self.captureButton.clicked.connect(lambda: self.captureButtonPressed())
+        self.captureButton.clicked.connect(lambda: self.previewImage())
+        
         self.deleteButton.clicked.connect(lambda: self.deleteButtonPressed())
         self.currentFrame.valueChanged.connect(lambda: self.currentFrameChanged(self.currentFrame.value()))
         self.fullRadio.toggled.connect(

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>500</height>
+    <width>523</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,6 +29,9 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Capture</string>
     </property>
@@ -41,6 +44,9 @@
       <width>93</width>
       <height>28</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
      <string>Play</string>
@@ -55,6 +61,9 @@
       <height>28</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Delete</string>
     </property>
@@ -67,6 +76,9 @@
       <width>93</width>
       <height>28</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
      <string>Export</string>
@@ -110,13 +122,16 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>200</x>
       <y>400</y>
-      <width>55</width>
+      <width>16</width>
       <height>16</height>
      </rect>
     </property>
@@ -133,8 +148,11 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{&quot;color: red;}&quot;</string>
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="QGroupBox" name="speedGroup">
@@ -164,6 +182,9 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>slow</string>
      </property>
@@ -179,6 +200,9 @@
        <width>95</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>medium</string>
@@ -196,10 +220,28 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>full</string>
      </property>
     </widget>
+    <zorder>slowRadio</zorder>
+    <zorder>mediumRadio</zorder>
+    <zorder>fullRadio</zorder>
+    <zorder>mediumRadio</zorder>
+    <zorder>fullRadio</zorder>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>470</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -207,7 +249,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
+     <width>523</width>
      <height>26</height>
     </rect>
    </property>
