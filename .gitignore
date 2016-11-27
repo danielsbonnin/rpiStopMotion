@@ -3,5 +3,6 @@ __pycache__/
 *.jpg
 *.p
 *.user
-
+__init__.py
+*.autosave
 

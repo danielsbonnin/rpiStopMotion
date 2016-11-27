@@ -14,18 +14,19 @@ class Movie:
     def __init__(self, max_frames=globals.MAX_FRAMES, data_file=globals.DATA_FILE):
         self.load_data(data_file)
     
-    capture_count = 0
-    frame_count = 0
-    cur_frame = 1
-    frame_rate = 20
-    preview_count = 1
-    data_file = "data.p"
+    capture_count = 0    # Total number of pictures taken
+    frame_count = 0  # Number frames currently in movie
+    cur_frame = 1    # Frame currently displayed
+    frame_rate = 15
+    preview_count = 1   #Number frames to loop in preview
+    data_file = "data.p"    #filename of save file
     frames = []
     
     def load_data(self, the_data_file=data_file):
         """ load meta data from pickle file """
         try:
-            data = pickle.load(open( the_data_file, "rb"))
+            with open( the_data_file, "rb") as df:
+                data = pickle.load(df)
         except:
             print('Error with loading data file. Trying to save some fresh data')
             self.new_save_data(the_data_file)
@@ -64,7 +65,8 @@ class Movie:
             'data_file' : the_data_file
             }
         try:
-            pickle.dump( data, open( the_data_file, "wb+" ))
+            with open( the_data_file, 'wb+' ) as theDataFile:
+                pickle.dump( data, theDataFile)
         except Exception as e:
             print('Error saving data file{}: {}'.format(the_data_file, e))
     
@@ -75,7 +77,7 @@ class Movie:
         return self.frames[frameNo - 1].img_file
 
     def get_next_filename(self, capture_num=None):
-        if not capture_num:
+        if capture_num is None:
             capture_num = self.capture_count
         return str(capture_num + 1) + '.jpg'
         
@@ -89,7 +91,7 @@ class Movie:
         self.save_data(self.data_file)
     
     def delete_frame(self, frameNo):
-        print('frameNo: {} frame_count: {}'.format(str(frameNo), str(self.frame_count)))
+        """ Delete frame from self.frames. ** frameNo is 1-indexed ** """
         assert(frameNo > 0 and frameNo <= self.frame_count)
         for i in range(frameNo, self.frame_count, 1):
             self.frames[i - 1] = self.frames[i]
@@ -109,3 +111,16 @@ class Movie:
         assert(preview_count <= self.frame_count)
         self.preview_count = preview_count
         self.save_data()
+    
+    def set_cur_frame(self, frameNo):
+        """ Set cur_frame """
+        if (frameNo < 1) or (frameNo > self.frame_count):
+            print('frameNo: {:d} out of bounds'.format(frameNo))
+            return None
+        self.cur_frame = frameNo
+        return frameNo
+        
+    def toString(self):
+        return ('capture_count: {}\nframe_count: {}\ncur_frame:{}\npreview_count: {}\ndata_file: {}\n'.format(
+            str(self.capture_count), str(self.frame_count),str(self.cur_frame),
+            str(self.preview_count), self.data_file))

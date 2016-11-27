@@ -2,10 +2,12 @@ import sys
 
  # This gets the Qt stuff
 import PyQt5
+from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import *
 import json
+import stopMotion
 # This is our window from QtCreator
-import mainwindow
+from mainwindow import Ui_MainWindow
 import movie
 import globals
 # Only use picamera modules on the rpi
@@ -25,48 +27,31 @@ if sys.platform == "linux":
 
 else:
     IS_RPI = False
-
-
-    
 data = {}
 
-
-
 # create class for our Raspberry Pi GUI
-class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     movie = movie.Movie()
     camera = None
     num_dial_notches = 0
     playing = False
-    def scroll(self, value):
-        old_value = (self.movie.cur_frame - 1) % self.num_dial_notches
-        if value in [(old_value - 1), (old_value + self.num_dial_notches - 1)] and\
-            (self.movie.cur_frame > 1):
-            self.movie.cur_frame -= 1
-        elif value in [(old_value + 1), (old_value - 9)] and\
-            self.movie.cur_frame < self.movie.frame_count:
-            self.movie.cur_frame += 1
-        self.updateUI()
-        print('dial value: {} old cur_frame mod 10: {} new cur_frame: {}'.format(str(value), str(old_value), str(self.movie.cur_frame)))
+
+    def currentFrameChanged(self, value):
+        if self.movie.set_cur_frame(value):
+            self.currentFrame.setStyleSheet("color: black;")
+            self.updateUI()
+        else:
+            self.currentFrame.setStyleSheet("color: red;")
     def updateUI(self):
         self.numFrames.setText(str(self.movie.frame_count))
-        self.currentFrame.setText(str(self.movie.cur_frame))
-        self.frameRateSpinBox.setValue(self.movie.frame_rate)
-        self.numFramesSpinBox.setMaximum(self.movie.cur_frame)
-        if self.movie.preview_count <= self.movie.cur_frame:
-            self.numFramesSpinBox.setValue(self.movie.preview_count)
-        self.dial.setValue(self.movie.cur_frame % self.num_dial_notches + 1)
         self.show_image(self.movie.get_filename_by_frame_no(self.movie.cur_frame))
     def show_image(self, filename):
         img = PyQt5.QtGui.QPixmap(filename)
         self.imageView.setPixmap(img)
     def captureButtonPressed(self):
         
-        print("captureButtonPressed")
-        try:
-            filename = self.movie.get_next_filename()
-        except:
-            print('get_next_filename() had a problem')
+        filename = self.movie.get_next_filename()
+        
         try:
             self.camera.capture(filename)
         except:
@@ -87,13 +72,23 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
     
     def frameRateChanged(self, value):
         self.movie.set_frame_rate(value)
-    
+        print('frame rate changed to {}'.format(value))
+
     def numPlaybackFramesChanged(self, value):
         self.movie.set_preview_count(value)
-    
+        
+    def speedState(self, radio):
+        """ Handle a radio button event """
+        if radio.text() == "slow" and radio.isChecked() == True:
+            self.frameRateChanged(5)
+        elif radio.text() == "medium" and radio.isChecked() == True:
+            self.frameRateChanged(15)
+        else:
+            self.frameRateChanged(30)
+ 
     def playPreview(self):
         from time import sleep
-        
+        self.movie.preview_count = self.movie.frame_count
         self.playing = not self.playing
         if self.playing == True:
             self.playButton.setText('Stop')
@@ -101,8 +96,9 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
             self.playButton.setText('Play')
         while self.playing:
             for i in range(1, self.movie.preview_count + 1):
-                self.currentFrame.setText(str(i))
-                self.show_image(self.movie.get_filename_by_frame_no(i))      
+                self.currentFrame.setValue(i)
+                self.show_image(self.movie.get_filename_by_frame_no(i))  
+                self.currentFrame.setValue(i)
                 sleep(1 / self.movie.frame_rate)
                 QApplication.processEvents()
     # access variables inside of the UI's file
@@ -119,11 +115,14 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
             self.camera = StubCamera()
         self.captureButton.clicked.connect(lambda: self.captureButtonPressed())
         self.deleteButton.clicked.connect(lambda: self.deleteButtonPressed())
-        self.dial.valueChanged.connect(lambda: self.scroll(self.dial.value()))
-        self.frameRateSpinBox.valueChanged.connect(
-            lambda: self.frameRateChanged(self.frameRateSpinBox.value()))
-        self.numFramesSpinBox.valueChanged.connect(
-            lambda: self.numPlaybackFramesChanged(self.numFramesSpinBox.value()))
+        self.currentFrame.valueChanged.connect(lambda: self.currentFrameChanged(self.currentFrame.value()))
+        self.fullRadio.toggled.connect(
+            lambda: self.speedState(self.fullRadio))
+        self.mediumRadio.toggled.connect(
+            lambda: self.speedState(self.mediumRadio))
+        self.slowRadio.toggled.connect(
+            lambda: self.speedState(self.slowRadio))
+        
         self.playButton.clicked.connect(lambda: self.playPreview())
 def main():
  
