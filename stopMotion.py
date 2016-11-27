@@ -125,6 +125,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print('escape key')
             if self.in_capture_loop == True:
                 self.in_capture_loop = False
+                self.camera.stop_preview()
             else:
                 self.close()
     # access variables inside of the UI's file
