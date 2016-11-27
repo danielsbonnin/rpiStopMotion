@@ -21,6 +21,11 @@ class StubCamera():
         except Exception as e:
             print('{}'.format(e))
         print('Img copied to {}'.format(name))
+    
+    def start_preview(self):
+        print('started preview')
+    def stop_preview(self):
+        print('stopped preview')
 if sys.platform == "linux":
     IS_RPI = True
     from picamera import PiCamera
@@ -49,7 +54,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         img = PyQt5.QtGui.QPixmap(filename)
         self.imageView.setPixmap(img)
     def captureButtonPressed(self):
-        
+        import time
+        self.camera.start_preview()
+        time.sleep(3)
+        self.camera.stop_preview()
+        """
         filename = self.movie.get_next_filename()
         
         try:
@@ -64,7 +73,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print('Frame {} added'.format(filename))
         self.show_image(filename)
         self.updateUI()
-    
+        """
     def deleteButtonPressed(self):
         print('delete button pressed')
         self.movie.delete_frame(self.movie.cur_frame)
