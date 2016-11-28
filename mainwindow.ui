@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>523</width>
-    <height>515</height>
+    <width>786</width>
+    <height>533</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -243,13 +243,506 @@
      </rect>
     </property>
    </widget>
+   <widget class="QGroupBox" name="cameraSettings">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>30</y>
+      <width>191</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Camera Settings</string>
+    </property>
+    <widget class="QSlider" name="brightnessSlider">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Brightness</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Contrast</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="contrastSlider">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>-100</number>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>drc_strength</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="drcComboBox">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>160</y>
+       <width>73</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="currentText">
+      <string>off</string>
+     </property>
+     <property name="maxVisibleItems">
+      <number>4</number>
+     </property>
+     <property name="minimumContentsLength">
+      <number>10</number>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>low</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>medium</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>high</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>200</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>exposure mode</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="exposureComboBox">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>220</y>
+       <width>73</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="currentText">
+      <string>off</string>
+     </property>
+     <property name="maxVisibleItems">
+      <number>10</number>
+     </property>
+     <property name="minimumContentsLength">
+      <number>4</number>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>night</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>nightpreview</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>backlight</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>spotlight</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>sports</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>snow</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>beach</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>verylong</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>fixedfps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>antishake</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>fireworks</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>auto</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>exposure compensation</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="exposureSlider">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>-25</number>
+     </property>
+     <property name="maximum">
+      <number>25</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="flipCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>310</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>flip</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="denoiseCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>330</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>denoise</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>310</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>effect</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="effectComboBox">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>330</y>
+       <width>73</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="currentText">
+      <string>none</string>
+     </property>
+     <property name="maxVisibleItems">
+      <number>10</number>
+     </property>
+     <property name="minimumContentsLength">
+      <number>4</number>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>none</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>negative</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>solarize</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>sketch</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>denoise</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>emboss</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>oilpaint</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>hatch</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>gpen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>pastel</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>watercolor</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>film</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>blur</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>saturation</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>colorswap</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>washedout</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>posterize</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>colorpoint</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>colorbalance</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>cartoon</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>deinterlace1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>deinterlace2</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>370</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>iso</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="isoSlider">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>1600</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="applyButton">
+     <property name="geometry">
+      <rect>
+       <x>102</x>
+       <y>410</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>apply</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="resetButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>410</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>reset</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>523</width>
+     <width>786</width>
      <height>26</height>
     </rect>
    </property>

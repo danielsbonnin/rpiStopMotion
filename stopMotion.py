@@ -13,6 +13,7 @@ import globals
 # Only use picamera modules on the rpi
 class StubCamera():
     name = "name"
+    brightness = 50
     def capture(self, name='image.jpg'):
         print('stubcapture')
         try:
@@ -51,6 +52,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateUI(self):
         self.numFrames.setText(str(self.movie.frame_count))
         self.show_image(self.movie.get_filename_by_frame_no(self.movie.cur_frame))
+        self.brightnessSlider.setValue(self.camera.brightness)
     def show_image(self, filename):
         img = PyQt5.QtGui.QPixmap(filename)
         self.imageView.setPixmap(img)
@@ -128,18 +130,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.camera.stop_preview()
             else:
                 self.close()
+    def updateCamera(self):
+        """ Update camera settings """
+        import time
+        self.camera.brightness = self.brightnessSlider.value()
+        time.sleep(2)
+        
     # access variables inside of the UI's file
     def __init__(self):
         super(self.__class__, self).__init__()
         self.num_dial_notches = globals.NUM_DIAL_NOTCHES
-        self.setupUi(self) # gets defined in the UI file
-        self.movie = movie.Movie()
         
-        self.updateUI()
+        self.movie = movie.Movie()
+        self.setupUi(self) # gets defined in the UI file
+        
         if IS_RPI:
             self.camera = PiCamera()
         else:
             self.camera = StubCamera()
+        self.updateUI()
         self.captureButton.clicked.connect(lambda: self.previewImage())
         
         self.deleteButton.clicked.connect(lambda: self.deleteButtonPressed())
@@ -150,6 +159,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lambda: self.speedState(self.mediumRadio))
         self.slowRadio.toggled.connect(
             lambda: self.speedState(self.slowRadio))
+        self.applyButton.clicked.connect(lambda: self.updateCamera())
         
         self.playButton.clicked.connect(lambda: self.playPreview())
 def main():
