@@ -136,9 +136,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.camera.brightness = self.brightnessSlider.value()
         self.camera.contrast = self.contrastSlider.value()
         self.camera.exposure_compensation = self.exposureSlider.value()
-        if self.flipCheckBox.checked():
+        if self.flipCheckBox.isChecked():
             self.camera.hflip = True
-        if self.denoiseCheckBox.checked():
+        if self.denoiseCheckBox.isChecked():
             self.camera.image_denoise = True
         time.sleep(2)
         
