@@ -136,7 +136,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.camera.brightness = self.brightnessSlider.value()
         self.camera.contrast = self.contrastSlider.value()
         self.camera.exposure_compensation = self.exposureSlider.value()
-        
+        if self.flipCheckBox.checked():
+            self.camera.hflip = True
+        if self.denoiseCheckBox.checked():
+            self.camera.image_denoise = True
         time.sleep(2)
         
     # access variables inside of the UI's file
