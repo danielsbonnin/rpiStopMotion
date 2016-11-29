@@ -264,6 +264,9 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="minimum">
       <number>1</number>
      </property>
@@ -308,6 +311,9 @@
        <width>160</width>
        <height>22</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="minimum">
       <number>-100</number>
@@ -395,6 +401,9 @@
        <width>73</width>
        <height>22</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentText">
       <string>off</string>
@@ -496,6 +505,9 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="minimum">
       <number>-25</number>
      </property>
@@ -515,6 +527,9 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>flip</string>
      </property>
@@ -527,6 +542,9 @@
        <width>81</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>denoise</string>
@@ -553,6 +571,9 @@
        <width>73</width>
        <height>22</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentText">
       <string>none</string>
@@ -741,6 +762,19 @@
       <string>reset</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QCheckBox" name="overlayCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>430</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Overlay</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
