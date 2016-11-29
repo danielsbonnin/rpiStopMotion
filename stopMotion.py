@@ -134,6 +134,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """ Update camera settings """
         import time
         self.camera.brightness = self.brightnessSlider.value()
+        self.camera.contrast = self.contrastSlider.value()
+        self.camera.exposure_compensation = self.exposureSlider.value()
+        
         time.sleep(2)
         
     # access variables inside of the UI's file

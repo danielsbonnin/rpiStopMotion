@@ -718,6 +718,9 @@
        <height>28</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>apply</string>
      </property>
@@ -730,6 +733,9 @@
        <width>71</width>
        <height>28</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>reset</string>
