@@ -60,7 +60,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def previewImage(self):
         import time
         self.in_capture_loop = True
-        self.camera.start_preview()
+        self.camera.start_preview(fullscreen=False, window=(0,0,500,500))
 
     def captureButtonPressed(self):
         import time
